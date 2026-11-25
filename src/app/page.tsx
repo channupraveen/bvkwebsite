@@ -1,69 +1,296 @@
 import Image from "next/image";
+import { Icon } from "@/components/Icon";
+import { Clocks, Disclaimer, EnquiryForm } from "@/components/Interactive";
+import { ScrollEffects } from "@/components/ScrollEffects";
+import { MainNav } from "@/components/MainNav";
+import { MomentsSlider } from "@/components/MomentsSlider";
+import { site, waLink, courts, nriServices, consultSlots, steps, faqs, moments } from "@/lib/site";
+
+const litigation = [
+  "Civil & Property Suits", "Criminal Law & Bail", "Family & Divorce", "Cheque Dishonour (s. 138)",
+  "Consumer Disputes", "Writ Petitions", "Injunctions", "Recovery Suits",
+];
+const advisory = [
+  "Legal Notices & Replies", "Sale Deeds & Agreements", "Title Verification", "Wills & Probate",
+  "Lease & Rental Agreements", "Affidavits",
+];
+
+function JsonLd() {
+  const data = [
+    {
+      "@context": "https://schema.org",
+      "@type": "LegalService",
+      name: site.name,
+      url: site.url,
+      telephone: site.phoneE164,
+      image: `${site.url}/vinay-kumar-high-court.jpg`,
+      founder: { "@type": "Person", name: site.advocate, jobTitle: "Advocate" },
+      address: { "@type": "PostalAddress", streetAddress: "#2-127, HB Colony", addressLocality: "Medchal", addressRegion: "Telangana", postalCode: "501401", addressCountry: "IN" },
+      hasMap: site.mapsUrl,
+      areaServed: [
+        { "@type": "City", name: "Hyderabad" },
+        { "@type": "State", name: "Telangana" },
+        { "@type": "Country", name: "United States" },
+        { "@type": "Country", name: "United Kingdom" },
+      ],
+      knowsLanguage: ["en", "te", "hi"],
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+    },
+  ];
+  return (
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data).replace(/</g, "\\u003c") }} />
+  );
+}
+
+function Tbc({ children }: { children: React.ReactNode }) {
+  return <span className="tbc">{children}</span>;
+}
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <>
+      <JsonLd />
+      <Disclaimer />
+      <ScrollEffects />
+
+      <div className="topbar">
+        <div className="wrap">
+          <a href="#nri">NRI Desk (USA &amp; UK)</a>
+          <a href={waLink()}>WhatsApp {site.phoneDisplay}</a>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
+      </div>
+
+      <header className="site">
+        <div className="wrap">
+          <a className="logo" href="#top" aria-label={`${site.name}, home`}>
+            <Image className="emblem" src="/bvk-logo.png" alt="" width={70} height={64} priority style={{ height: 64, width: "auto" }} />
           </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+          <MainNav />
+          <a className="btn" href="#contact"><Icon name="calendar" strokeWidth={2} /><span>Get In Touch</span></a>
         </div>
+      </header>
+
+      <main id="top">
+        <section className="hero dark contour">
+          <div className="wrap">
+            <div data-reveal="up">
+              <h1>BVK Law <em>Chambers</em></h1>
+              <p className="lede">
+                The chambers of Advocate {site.advocate}, Hyderabad. Civil, criminal, family and property matters before
+                the courts of Hyderabad and the High Court for the State of Telangana, with video consultations for
+                clients in the USA and the UK.
+              </p>
+              <div className="actions">
+                <a className="btn" href={waLink()}><Icon name="whatsapp" />WhatsApp {site.phoneDisplay}</a>
+                <a className="btn ghost" href="#nri">I live in the USA or UK</a>
+              </div>
+            </div>
+            <div className="hero-photo" data-reveal="zoom" data-delay="150">
+              <div className="disc">
+                <Image src="/vinay-kumar-high-court.jpg" alt={`Advocate ${site.advocate} in court dress outside the High Court for the State of Telangana`} width={900} height={1200} sizes="(max-width: 620px) 300px, (max-width: 980px) 360px, 420px" priority />
+              </div>
+              <div className="tag" data-reveal="right" data-delay="450"><b>Adv. {site.advocate}</b><span>Founder, {site.name}</span></div>
+            </div>
+          </div>
+        </section>
+
+        <section className="intro" id="expertise">
+          <div className="wrap">
+            <p data-reveal="up">
+              At {site.name}, we take up matters at every stage, from the first legal notice through trial, appeal and
+              execution. We appear before the High Courts, Civil Courts, Criminal Courts, Family Courts, Consumer
+              Commissions, tribunals and work with families abroad through a power of attorney, video calls and scanned
+              documents.
+            </p>
+          </div>
+        </section>
+
+        <section className="band beige contour">
+          <div className="wrap">
+            <div className="panel photo" data-reveal="left">
+              <Image src="/office/chambers-hall.jpg" alt={`Reception and meeting area of ${site.name}, Hyderabad`} width={900} height={1200} sizes="(max-width: 980px) 100vw, 520px" />
+              <div className="panel-note"><span>Appears before</span>{courts.slice(0, 3).join(" · ")}</div>
+            </div>
+            <div data-reveal="right" data-delay="120">
+              <h2>Litigation</h2>
+              <div className="rule" />
+              <p>
+                We represent clients in civil, criminal and family proceedings across the Hyderabad courts, from filing
+                and interim relief to final hearing. Every matter starts with a reading of the documents and a plain
+                explanation of the remedies, the likely stages and the time each takes.
+              </p>
+              <ul className="pills">{litigation.map((t, i) => <li key={t} data-reveal="up" data-delay={200 + i * 60}>{t}</li>)}</ul>
+            </div>
+          </div>
+        </section>
+
+        <section className="band flip contour" id="advisory">
+          <div className="wrap">
+            <div className="panel photo" data-reveal="right">
+              <Image src="/office/chambers-desk.jpg" alt={`The advocate’s desk and law library at ${site.name}`} width={900} height={1200} sizes="(max-width: 980px) 100vw, 520px" />
+            </div>
+            <div data-reveal="left" data-delay="120">
+              <h2>Advisory &amp; Documentation</h2>
+              <div className="rule" />
+              <p>
+                Many disputes are avoided by careful paperwork. We draft and review legal notices, agreements and sale
+                deeds, verify title before a property purchase, and prepare wills and affidavits.
+              </p>
+              <ul className="pills">{advisory.map((t, i) => <li key={t} data-reveal="up" data-delay={200 + i * 60}>{t}</li>)}</ul>
+            </div>
+          </div>
+        </section>
+
+        <section className="band dark contour" id="nri">
+          <div className="wrap">
+            <div className="panel art clocks" data-reveal="left" aria-label="Current time in Hyderabad, London and New York">
+              <Clocks />
+            </div>
+            <div data-reveal="right" data-delay="120">
+              <h2>NRI Desk: USA &amp; UK</h2>
+              <div className="rule" />
+              <p>
+                Families living abroad often have property, inheritance or family matters still pending in Telangana.
+                Most of this work can be done without travelling to India.
+              </p>
+              <ul className="pills">{nriServices.map((n, i) => <li key={n.title} data-reveal="up" data-delay={200 + i * 60}>{n.title}</li>)}</ul>
+              <div className="slots">
+                <table>
+                  <thead><tr><th>Video consultation</th><th>India</th><th>UK</th><th>US East</th><th>US West</th></tr></thead>
+                  <tbody>
+                    {consultSlots.map((s) => (
+                      <tr key={s.slot}><td>{s.slot}</td><td>{s.ist}</td><td>{s.uk}</td><td>{s.usEast}</td><td>{s.usWest}</td></tr>
+                    ))}
+                  </tbody>
+                </table>
+                <p>Winter times; UK and US move one hour later in summer. * Previous evening in the USA. Slots <Tbc>to be confirmed</Tbc>.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="process beige contour" id="process" style={{ background: "var(--beige)" }}>
+          <div className="wrap">
+            <div className="sec-title" data-reveal="up">
+              <h2>How It Works</h2>
+              <p>The same four steps whether you visit the chambers in Hyderabad or write to us from abroad.</p>
+            </div>
+            <ol className="steps">
+              {steps.map((s, i) => <li key={s.title} data-reveal="up" data-delay={i * 120}><h3>{s.title}</h3><p>{s.text}</p></li>)}
+            </ol>
+          </div>
+        </section>
+
+        <section className="moments" id="moments">
+          <div className="wrap">
+            <div className="sec-title" data-reveal="up">
+              <h2>Moments from the Chambers</h2>
+              <p>From the courts and the chambers in Hyderabad.</p>
+            </div>
+            <MomentsSlider items={moments} />
+          </div>
+        </section>
+
+        <section className="faq" id="faq" style={{ background: "var(--beige)" }}>
+          <div className="wrap">
+            <div className="sec-title" data-reveal="up">
+              <h2>Common Questions</h2>
+              <p>General information only. Every matter depends on its own facts and documents.</p>
+            </div>
+            <div className="list">
+              {faqs.map((f, i) => (
+                <details key={f.q} open={i === 0} data-reveal="up" data-delay={i * 80}>
+                  <summary>{f.q}</summary>
+                  <p>{f.a}</p>
+                </details>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="visit" id="chambers" aria-labelledby="visit-title">
+          <Image src="/office/chambers-wide.jpg" alt={`Inside ${site.name}, Hyderabad`} fill sizes="100vw" className="visit-bg" />
+          <div className="wrap">
+            <div className="visit-card" data-reveal="up">
+              <span className="kicker">Medchal · Hyderabad</span>
+              <h2 id="visit-title">Visit the Chambers</h2>
+              <p>Meet Advocate {site.advocate} in person to go through your documents. Visits are by appointment.</p>
+              <p className="visit-meta">{site.addressLines[0]}<br />{site.addressLines[1]}<br /><Tbc>{site.hours}</Tbc></p>
+              <div className="visit-actions">
+                <a className="btn" href={waLink("Hello, I would like to book an appointment at the chambers.")}><Icon name="calendar" strokeWidth={2} />Book an appointment</a>
+                <a className="btn ghost" href={site.mapsUrl}><Icon name="pin" strokeWidth={2} />Get directions</a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="contact dark contour" id="contact" style={{ background: "var(--charcoal)", color: "#fff" }}>
+          <div className="wrap">
+            <div data-reveal="left">
+              <h2>Get In Touch</h2>
+              <div className="rows">
+                <div className="row">
+                  <div className="ic"><Icon name="phone" /></div>
+                  <div><h3>Phone &amp; WhatsApp</h3><p><a href={waLink()}>{site.phoneDisplay}</a></p><p>From the USA dial 011 91, from the UK 00 91.</p></div>
+                </div>
+                <div className="row">
+                  <div className="ic"><Icon name="pin" /></div>
+                  <div><h3>Chambers</h3><p>{site.addressLines[0]}<br />{site.addressLines[1]}</p><p><a className="maplink" href={site.mapsUrl}>Get directions on Google Maps</a></p><p><Tbc>{site.hours}</Tbc></p></div>
+                </div>
+                <div className="row">
+                  <div className="ic"><Icon name="mail" /></div>
+                  <div><h3>Email</h3><p><a href={`mailto:${site.email}`}>{site.email}</a></p></div>
+                </div>
+              </div>
+            </div>
+            <EnquiryForm />
+          </div>
+        </section>
       </main>
-    </div>
+
+      <footer className="site">
+        <div className="wrap">
+          <a className="foot-logo" href="#top" aria-label={`${site.name}, back to top`}>
+            <Image src="/bvk-logo.png" alt="" width={92} height={84} style={{ height: 84, width: "auto" }} />
+            <span>BVK Law Chambers<small>Advocates · Hyderabad · USA · UK</small></span>
+          </a>
+          <div className="cols">
+            <div>
+              <h2>About Us</h2>
+              <p>
+                {site.name} is the practice of Advocate {site.advocate}, enrolled with the Bar Council of Telangana,
+                serving clients in Hyderabad, the USA and the UK.
+              </p>
+            </div>
+            <div>
+              <h2>Practice Areas</h2>
+              <ul>
+                <li><a href="#expertise">Litigation</a></li>
+                <li><a href="#advisory">Advisory &amp; Documentation</a></li>
+                <li><a href="#nri">NRI Desk</a></li>
+              </ul>
+            </div>
+            <div>
+              <h2>Contact</h2>
+              <ul>
+                <li><a href={waLink()}>{site.phoneDisplay}</a></li>
+                <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
+                <li>{site.addressLines[0]}<br />{site.addressLines[1]}</li>
+              </ul>
+            </div>
+          </div>
+          <div className="legal">
+            <span>© 2026 {site.name}. All rights reserved.</span>
+            <span>Information only, in line with Rule 36 of the Bar Council of India Rules. Not legal advice.</span>
+          </div>
+        </div>
+      </footer>
+
+      <a className="fab" href={waLink()} aria-label="Chat on WhatsApp"><Icon name="whatsapp" /><span>WhatsApp</span></a>
+    </>
   );
 }
