@@ -113,7 +113,7 @@ export default function Home() {
           <div className="wrap">
             <div className="panel photo" data-reveal="left">
               <Image src="/office/chambers-hall.jpg" alt={`Reception and meeting area of ${site.name}, Hyderabad`} width={900} height={1200} sizes="(max-width: 980px) 100vw, 520px" />
-              <div className="panel-note"><span>Appears before</span>{courts.slice(0, 3).join(" · ")}</div>
+              <div className="panel-note"><span>Appears before</span>{courts.join(" · ")}</div>
             </div>
             <div data-reveal="right" data-delay="120">
               <h2>Litigation</h2>

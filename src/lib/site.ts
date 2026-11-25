@@ -22,11 +22,12 @@ export const waLink = (text?: string) =>
   `https://wa.me/${site.whatsapp}${text ? `?text=${encodeURIComponent(text)}` : ""}`;
 
 export const courts = [
-  "High Court for the State of Telangana",
-  "City Civil Court, Hyderabad",
-  "Nampally Criminal Courts",
-  "Family Court, Hyderabad",
+  "High Courts",
+  "Civil Courts",
+  "Criminal Courts",
+  "Family Courts",
   "Consumer Commissions",
+  "Tribunals",
 ];
 
 export type IconName =
