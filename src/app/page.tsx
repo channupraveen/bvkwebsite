@@ -19,21 +19,50 @@ function JsonLd() {
   const data = [
     {
       "@context": "https://schema.org",
-      "@type": "LegalService",
+      "@type": ["LegalService", "LocalBusiness"],
+      "@id": `${site.url}/#chambers`,
       name: site.name,
+      description:
+        "Advocates in Hyderabad and Medchal for civil, criminal, family and property matters before the courts across Telangana and the High Court of Telangana, with video consultations for NRIs in the USA and UK.",
       url: site.url,
       telephone: site.phoneE164,
+      email: site.email,
       image: `${site.url}/vinay-kumar-high-court.jpg`,
-      founder: { "@type": "Person", name: site.advocate, jobTitle: "Advocate" },
-      address: { "@type": "PostalAddress", streetAddress: "#2-127, HB Colony", addressLocality: "Medchal", addressRegion: "Telangana", postalCode: "501401", addressCountry: "IN" },
+      logo: `${site.url}/bvk-logo.png`,
+      priceRange: "₹₹",
       hasMap: site.mapsUrl,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "#2-127, HB Colony",
+        addressLocality: "Medchal",
+        addressRegion: "Telangana",
+        postalCode: "501401",
+        addressCountry: "IN",
+      },
       areaServed: [
         { "@type": "City", name: "Hyderabad" },
+        { "@type": "City", name: "Medchal" },
         { "@type": "State", name: "Telangana" },
         { "@type": "Country", name: "United States" },
         { "@type": "Country", name: "United Kingdom" },
       ],
       knowsLanguage: ["en", "te", "hi"],
+      knowsAbout: [
+        "Civil litigation", "Criminal law and bail", "Family law and divorce", "Property disputes",
+        "Cheque dishonour under Section 138 NI Act", "Consumer disputes", "Power of attorney for NRIs",
+        "Succession and inheritance", "Legal notices and documentation",
+      ],
+      founder: { "@id": `${site.url}/#advocate` },
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "@id": `${site.url}/#advocate`,
+      name: `Advocate ${site.advocate}`,
+      jobTitle: "Advocate",
+      worksFor: { "@id": `${site.url}/#chambers` },
+      image: `${site.url}/vinay-kumar-high-court.jpg`,
+      memberOf: { "@type": "Organization", name: "Bar Council of Telangana" },
     },
     {
       "@context": "https://schema.org",
@@ -78,15 +107,16 @@ export default function Home() {
         <section className="hero dark contour">
           <div className="wrap">
             <div data-reveal="up">
+              <p className="eyebrow">Advocate in Hyderabad &amp; Medchal · High Court of Telangana</p>
               <h1>BVK Law <em>Chambers</em></h1>
               <p className="lede">
-                The chambers of Advocate {site.advocate}, Hyderabad. Civil, criminal, family and property matters before
-                the courts of Hyderabad and the High Court for the State of Telangana, with video consultations for
-                clients in the USA and the UK.
+                The BVK Law chambers of Advocate {site.advocate}, based in Hyderabad, handles civil, criminal, family, and
+                property matters before the courts across Telangana and the High Court of Telangana. We also offer video
+                consultations for clients in the USA and UK.
               </p>
               <div className="actions">
                 <a className="btn" href={waLink()}><Icon name="whatsapp" />WhatsApp {site.phoneDisplay}</a>
-                <a className="btn ghost" href="#nri">I live in the USA or UK</a>
+                <a className="btn ghost" href="#chambers">I live in Telangana</a>
               </div>
             </div>
             <div className="hero-photo" data-reveal="zoom" data-delay="150">
@@ -119,9 +149,10 @@ export default function Home() {
               <h2>Litigation</h2>
               <div className="rule" />
               <p>
-                We represent clients in civil, criminal and family proceedings across the Hyderabad courts, from filing
-                and interim relief to final hearing. Every matter starts with a reading of the documents and a plain
-                explanation of the remedies, the likely stages and the time each takes.
+                We represent clients in civil, criminal and family proceedings across the courts of Telangana, from
+                filing and interim relief to final hearing: property and partition suits, bail and criminal defence,
+                divorce and maintenance, and cheque bounce cases. Every matter starts with a reading of the documents
+                and a plain explanation of the remedies, the likely stages and the time each takes.
               </p>
               <ul className="pills">{litigation.map((t, i) => <li key={t} data-reveal="up" data-delay={200 + i * 60}>{t}</li>)}</ul>
             </div>
@@ -235,7 +266,7 @@ export default function Home() {
               <div className="rows">
                 <div className="row">
                   <div className="ic"><Icon name="phone" /></div>
-                  <div><h3>Phone &amp; WhatsApp</h3><p><a href={waLink()}>{site.phoneDisplay}</a></p><p>From the USA dial 011 91, from the UK 00 91.</p></div>
+                  <div><h3>Phone &amp; WhatsApp</h3><p><a href={waLink()}>{site.phoneDisplay}</a></p></div>
                 </div>
                 <div className="row">
                   <div className="ic"><Icon name="pin" /></div>
@@ -263,7 +294,7 @@ export default function Home() {
               <h2>About Us</h2>
               <p>
                 {site.name} is the practice of Advocate {site.advocate}, enrolled with the Bar Council of Telangana,
-                serving clients in Hyderabad, the USA and the UK.
+                serving clients in Hyderabad, Telangana and abroad.
               </p>
             </div>
             <div>

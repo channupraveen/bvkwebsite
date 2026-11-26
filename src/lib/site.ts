@@ -4,7 +4,7 @@
 export const site = {
   name: "BVK Law Chambers",
   advocate: "Vinay Kumar",
-  url: "https://bvklawchambers.com",
+  url: "https://www.bvklawchambers.com",
   phoneDisplay: "+91 95732 92027",
   phoneE164: "+919573292027",
   whatsapp: "919573292027",

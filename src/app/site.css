@@ -71,6 +71,7 @@ header.site .btn:hover { background: var(--beige); }
 /* hero */
 .hero { background: var(--charcoal); color: #fff; overflow: hidden; }
 .hero .wrap { display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center; min-height: 420px; padding-top: 56px; padding-bottom: 56px; }
+.hero .eyebrow { margin: 0 0 18px; font-size: 12.5px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: #e2c9a6; }
 .hero h1 { font-size: clamp(48px, 7vw, 84px); line-height: 1.02; }
 .hero h1 em { font-style: italic; color: #e2c9a6; }
 .hero .lede { max-width: 54ch; margin: 22px 0 30px; color: rgba(255,255,255,.78); font-size: 17px; }
