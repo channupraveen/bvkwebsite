@@ -4,7 +4,7 @@ import { Clocks, Disclaimer, EnquiryForm } from "@/components/Interactive";
 import { ScrollEffects } from "@/components/ScrollEffects";
 import { MainNav } from "@/components/MainNav";
 import { MomentsSlider } from "@/components/MomentsSlider";
-import { site, waLink, courts, nriServices, consultSlots, steps, faqs, moments } from "@/lib/site";
+import { site, waLink, socials, courts, nriServices, consultSlots, steps, faqs, moments } from "@/lib/site";
 
 const litigation = [
   "Civil & Property Suits", "Criminal Law & Bail", "Family & Divorce", "Cheque Dishonour (s. 138)",
@@ -31,6 +31,7 @@ function JsonLd() {
       logo: `${site.url}/bvk-logo.png`,
       priceRange: "₹₹",
       hasMap: site.mapsUrl,
+      sameAs: socials.map((x) => x.url),
       address: {
         "@type": "PostalAddress",
         streetAddress: "#2-127, HB Colony",
@@ -276,6 +277,17 @@ export default function Home() {
                   <div className="ic"><Icon name="mail" /></div>
                   <div><h3>Email</h3><p><a href={`mailto:${site.email}`}>{site.email}</a></p></div>
                 </div>
+                <div className="row">
+                  <div className="ic"><Icon name="instagram" /></div>
+                  <div>
+                    <h3>Follow</h3>
+                    <p className="social-links">
+                      {socials.map((x, k) => (
+                        <span key={x.name}>{k > 0 && " · "}<a href={x.url} target="_blank" rel="noopener noreferrer">{x.name}</a></span>
+                      ))}
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
             <EnquiryForm />
@@ -289,6 +301,15 @@ export default function Home() {
             <Image src="/bvk-logo.png" alt="" width={92} height={84} style={{ height: 84, width: "auto" }} />
             <span>BVK Law Chambers<small>Advocates · Hyderabad · USA · UK</small></span>
           </a>
+          <ul className="socials" aria-label="BVK Law Chambers on social media">
+            {socials.map((x) => (
+              <li key={x.name}>
+                <a href={x.url} target="_blank" rel="noopener noreferrer" aria-label={`${x.name}: ${x.handle}`}>
+                  <Icon name={x.icon} /><span>{x.name}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
           <div className="cols">
             <div>
               <h2>About Us</h2>

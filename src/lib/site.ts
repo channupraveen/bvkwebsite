@@ -18,6 +18,11 @@ export const site = {
   languages: "English, Telugu, Hindi",
 };
 
+export const socials = [
+  { name: "Instagram", handle: "@bvklawchambers", url: "https://www.instagram.com/bvklawchambers/", icon: "instagram" as const },
+  { name: "LinkedIn", handle: "BVK Law Chambers", url: "https://www.linkedin.com/in/bvk-lawchambers-2b2579452", icon: "linkedin" as const },
+];
+
 export const waLink = (text?: string) =>
   `https://wa.me/${site.whatsapp}${text ? `?text=${encodeURIComponent(text)}` : ""}`;
 
