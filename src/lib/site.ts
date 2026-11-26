@@ -101,3 +101,28 @@ export const moments: { src: string; width: number; height: number; caption: str
     detail: "GP for Medical, TSHC (Government Pleader, Telangana High Court)",
   },
 ];
+
+// "In The News": reported judgments in matters handled by the chambers.
+// Add newer ones at the top. Leave a field out if it isn't known.
+export const judgments: {
+  title: string; court: string; caseNo?: string; date?: string; bench?: string; summary?: string;
+  source: string; url: string;
+}[] = [
+  {
+    title: "Banothu Jyothi v. The State of Telangana & 3 Others",
+    court: "High Court of Telangana",
+    caseNo: "W.P. No. 41411 of 2022",
+    date: "14 November 2022",
+    bench: "Hon’ble Smt. Justice Lalitha Kanneganti",
+    summary:
+      "No-confidence motion notice against an Upa-Sarpanch issued under the repealed A.P. Panchayat Raj Act, 1994 set aside; fresh notice permitted only under the Telangana Panchayat Raj Act, 2018.",
+    source: "Indian Kanoon",
+    url: "https://indiankanoon.org/doc/99082227/",
+  },
+  {
+    title: "India Rambabu v. The State of Telangana",
+    court: "High Court of Telangana",
+    source: "SupremeToday",
+    url: "https://supremetoday.ai/doc/judgement/INDTEL00000221305",
+  },
+];

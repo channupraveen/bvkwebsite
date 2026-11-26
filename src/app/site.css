@@ -175,6 +175,21 @@ footer.site a { text-decoration: none; }
 footer.site a:hover { color: var(--accent); text-decoration: underline; }
 footer.site .legal { padding-top: 22px; font-size: 13px; color: var(--muted); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
 
+/* in the news */
+.news { padding: 96px 0; background: #2a2220; color: #fff; }
+.news .sec-title h2 { color: #fff; }
+.news .sec-title p { color: rgba(255,255,255,.8); }
+.news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; max-width: 1040px; margin: 0 auto; }
+.news-card { display: flex; flex-direction: column; background: rgba(255,255,255,.04); border: 1px solid rgba(226,201,166,.22); border-radius: 18px; padding: 28px; transition: border-color .3s, background .3s, transform .3s; }
+.news-card:hover { border-color: rgba(226,201,166,.6); background: rgba(255,255,255,.07); }
+.news-card .kicker { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: #e2c9a6; margin-bottom: 12px; }
+.news-card h3 { font-size: 24px; line-height: 1.25; margin-bottom: 10px; }
+.news-card .meta { font-size: 14px; color: rgba(255,255,255,.65); margin: 0 0 14px; }
+.news-card .summary { font-size: 15px; color: rgba(255,255,255,.82); margin: 0 0 20px; }
+.news-card .read { margin-top: auto; display: inline-flex; align-items: center; gap: 8px; color: #e2c9a6; font-size: 14.5px; text-decoration: none; }
+.news-card .read:hover { text-decoration: underline; text-underline-offset: 4px; }
+.news-card .read svg { width: 16px; height: 16px; }
+
 /* social links */
 footer.site .socials { display: flex; flex-wrap: wrap; gap: 10px; list-style: none; margin: -12px 0 40px; padding: 0; }
 footer.site .socials a { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px 8px 10px; border: 1px solid #e3d8c9; border-radius: 100px; font-size: 14px; color: var(--charcoal); text-decoration: none; transition: background .2s, color .2s, border-color .2s; }
@@ -457,6 +472,13 @@ ol.steps li:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(51
   .visit { min-height: 520px; }
   .visit .btn { width: 100%; }
   .visit-actions { flex-direction: column; }
+}
+
+@media (max-width: 620px) {
+  .news { padding: 64px 0; }
+  .news-grid { grid-template-columns: 1fr; }
+  .news-card { padding: 22px; }
+  .news-card h3 { font-size: 21px; }
 }
 
 @media (max-width: 380px) {

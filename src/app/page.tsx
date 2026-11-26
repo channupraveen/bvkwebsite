@@ -4,7 +4,7 @@ import { Clocks, Disclaimer, EnquiryForm } from "@/components/Interactive";
 import { ScrollEffects } from "@/components/ScrollEffects";
 import { MainNav } from "@/components/MainNav";
 import { MomentsSlider } from "@/components/MomentsSlider";
-import { site, waLink, socials, courts, nriServices, consultSlots, steps, faqs, moments } from "@/lib/site";
+import { site, waLink, socials, judgments, courts, nriServices, consultSlots, steps, faqs, moments } from "@/lib/site";
 
 const litigation = [
   "Civil & Property Suits", "Criminal Law & Bail", "Family & Divorce", "Cheque Dishonour (s. 138)",
@@ -224,6 +224,31 @@ export default function Home() {
               <p>From the courts and the chambers in Hyderabad.</p>
             </div>
             <MomentsSlider items={moments} />
+          </div>
+        </section>
+
+        <section className="news dark contour" id="news" aria-labelledby="news-title">
+          <div className="wrap">
+            <div className="sec-title" data-reveal="up">
+              <h2 id="news-title">In The News</h2>
+              <p>Reported judgments in matters argued by the chambers.</p>
+            </div>
+            <div className="news-grid">
+              {judgments.map((j, i) => (
+                <article className="news-card" key={j.url} data-reveal="up" data-delay={i * 120}>
+                  <span className="kicker">{j.court}{j.date ? ` · ${j.date}` : ""}</span>
+                  <h3>{j.title}</h3>
+                  {(j.caseNo || j.bench) && (
+                    <p className="meta">{[j.caseNo, j.bench].filter(Boolean).join(" · ")}</p>
+                  )}
+                  {j.summary && <p className="summary">{j.summary}</p>}
+                  <a className="read" href={j.url} target="_blank" rel="noopener noreferrer">
+                    Read the judgment on {j.source}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8" /></svg>
+                  </a>
+                </article>
+              ))}
+            </div>
           </div>
         </section>
 
